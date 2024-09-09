@@ -3,7 +3,7 @@
 d1 = {
   "hello": 10, "world": 20.5
 }
-
+#key는 hello value는 10 물건을 빠르게 찾고자 할 때 dic사용함
 print('-- Key 가 hello 인 항목의 value 는? --')
 print(d1["hello"])
 
@@ -13,6 +13,7 @@ for key in keys:
   print('-- Key:', key)
 
   value = d1[key] if key in d1 else '없는데요'
+ # 키가 존재하면 키의 값이 출력되고 아니면 없는데요가 출력됨
   # if key in d1:
   #   value = d1[key]
   # else:
