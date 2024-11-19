@@ -19,9 +19,9 @@ def quickSort(left, right): #q=inclusive
   # if left >= right: return         # 정렬할 것이 없으면 할 일이 없다
   if right < left + 4:
     return
-  vis.push(left, right)
+
   pivot = partition(left, right)   # pivot 위치를 결정해 온다
-  vis.set_pivot(pivot)
+
   quickSort(left, pivot-1)  # pivot 보다 왼쪽 그룹을 다시 quickSort 한다
   quickSort(pivot+1, right) # pivot 보다 오른쪽 그룹을 다시 quickSort 한다
   vis.pop()
@@ -48,7 +48,6 @@ def partition(left, right):
   while True:             # p 와 q 가 역전할때까지
     while True:           # 왼쪽에서 pivot 보다 큰 값을 찾을때까지
       p += 1
-      vis.set_p(p)
       if q < p: break
       if p <= right: vis.compare(pi, p)
       if p > right or array[p] >= pivot: break 
@@ -58,19 +57,12 @@ def partition(left, right):
 
     while True:           # 오른쪽에서 pivot 보다 작은 값을 찾을때까지
       q -= 1
-      vis.set_q(q)
       if q < p: break
-      if q >= left: vis.compare(pi, q)
       if q < left or array[q] <= pivot: break
       # 오른쪽에서 pivot 보다 작은 값을 찾았다
 
-      if q >= left: vis.set_right(q)
-
     if p >= q: break      # p 와 q 가 만날때까지 계속 진행한다
 
-    vis.set_left(p)
-    vis.set_right(q)
-    vis.swap(p, q)
     array[p], array[q] = array[q], array[p] 
     # 이제 p 이하에는 pivot 보다 작은 값만, q 이상에는 pivot 보다 큰 값만 있다
 
@@ -78,7 +70,6 @@ def partition(left, right):
   # pivot 값은 왼쪽 그룹 중에 가장 큰 값이므로 q 위치로 옮긴다
   # left 가 q 와 같다면 pivot 보다 작은것이 하나도 없다는 뜻이므로 옮길 필요가 없다
   if left != q:
-    vis.swap(left, q, True)
     array[left], array[q] = array[q], array[left]
 
   return q  # 결정된 pivot 의 위치를 리턴한다
